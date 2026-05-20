@@ -219,3 +219,8 @@ __marimo__/
 
 # Agent Skills
 .agents/
+
+.DS_Store
+
+# Model weight 
+*.pt
