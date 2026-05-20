@@ -224,3 +224,6 @@ __marimo__/
 
 # Model weight 
 *.pt
+
+# Video files
+videos/*
