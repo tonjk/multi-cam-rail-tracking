@@ -2,6 +2,8 @@ opencv-python
 numpy
 fastapi
 uvicorn
-jinja2
-websockets
+# jinja2
+# websockets
 ultralytics
+
+streamlit
