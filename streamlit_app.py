@@ -312,9 +312,13 @@ while True:
                 duty_placeholders[i].empty()
             st.session_state.last_alert_states[i] = cam_statuses[i]
 
-    # Render to Streamlit UI
-    header_placeholder.image(cv2.cvtColor(header, cv2.COLOR_BGR2RGB), width="stretch")
-    for i in range(3):
-        img_placeholders[i].image(cv2.cvtColor(annotated_frames[i], cv2.COLOR_BGR2RGB), width="stretch")
+    # Render to Streamlit UI (Optimized for Network/Ngrok Tunneling)
+    if st.session_state.frame_count % 2 == 0:
+        _, header_buffer = cv2.imencode('.jpg', header, [int(cv2.IMWRITE_JPEG_QUALITY), 80])
+        header_placeholder.image(header_buffer.tobytes(), output_format='JPEG', width="stretch")
+        
+        for i in range(3):
+            _, frame_buffer = cv2.imencode('.jpg', annotated_frames[i], [int(cv2.IMWRITE_JPEG_QUALITY), 60])
+            img_placeholders[i].image(frame_buffer.tobytes(), output_format='JPEG', width="stretch")
         
     time.sleep(0.01) # Small sleep to prevent CPU hogging
